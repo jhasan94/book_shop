@@ -22,7 +22,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/c++.jpg",
+      image: "assets/images/products/c++.jpg",
       color: Color(0xFF424242)),
   Product(
       id: 2,
@@ -30,7 +30,7 @@ List<Product> products = [
       price: 234,
       size: 8,
       description: dummyText,
-      image: "assets/images/c.jpg",
+      image: "assets/images/products/c.jpg",
       color: Color(0xFF424242)),
   Product(
       id: 3,
@@ -38,7 +38,7 @@ List<Product> products = [
       price: 234,
       size: 10,
       description: dummyText,
-      image: "assets/images/java.jpg",
+      image: "assets/images/products/java.jpg",
       color: Color(0xFF455A64)),
   Product(
       id: 4,
@@ -46,7 +46,7 @@ List<Product> products = [
       price: 234,
       size: 11,
       description: dummyText,
-      image: "assets/images/perl.jpg",
+      image: "assets/images/products/perl.jpg",
       color: Color(0xFF455A64)),
   Product(
       id: 5,
@@ -54,7 +54,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/php.png",
+      image: "assets/images/products/php.png",
       color: Color(0xFF9E9D24)),
   Product(
     id: 6,
@@ -62,7 +62,7 @@ List<Product> products = [
     price: 234,
     size: 12,
     description: dummyText,
-    image: "assets/images/python.jpg",
+    image: "assets/images/products/python.jpg",
     color: Color(0xFF01579B),
   ),
 ];
