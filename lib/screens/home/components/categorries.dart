@@ -9,7 +9,7 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   List<String> categories = [
-    "Programming Book",
+    "Islamic Book",
     "Networking Book",
     "Math Book",
     "Audio Book"

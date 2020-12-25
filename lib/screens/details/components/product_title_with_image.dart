@@ -18,7 +18,7 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Programming Book",
+            "Islamic Book",
             style: TextStyle(color: Colors.white),
           ),
           Text(
@@ -49,7 +49,7 @@ class ProductTitleWithImage extends StatelessWidget {
                   tag: "${product.id}",
                   child: Image.asset(
                     product.image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.contain,
                   ),
                 ),
               )

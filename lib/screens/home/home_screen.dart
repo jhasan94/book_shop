@@ -1,9 +1,9 @@
 import 'package:book_shop/constants.dart';
 import 'package:book_shop/screens/article.dart';
 import 'package:book_shop/screens/audio_book.dart';
+import 'package:book_shop/screens/books/book_screen.dart';
 import 'package:book_shop/screens/events/event_screen.dart';
 import 'package:book_shop/screens/home/components/body.dart';
-import 'package:book_shop/screens/text_book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -17,9 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 2;
 
   List<Widget> listWidgets = [
-    TextBook(),
-    AudioBook(),
     Body(),
+    AudioBook(),
+    TextBook(),
     Article(),
     EventScreen()
   ];
@@ -39,8 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
           //TabItem(icon: Icons.event, title: 'Fan Club'),
         ],
         initialActiveIndex: selectedIndex, //optional, default as 0
-        color: Colors.white,
-        backgroundColor: Colors.black54,
+        color: Colors.black,
+        backgroundColor: Colors.amber,
         onTap: onItemTapped,
       ),
     );
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.amber,
       elevation: 0,
       title: Text(
         "Book Shop",
@@ -61,25 +61,25 @@ class _HomeScreenState extends State<HomeScreen> {
       //   icon: SvgPicture.asset("assets/icons/back.svg"),
       //   onPressed: () {},
       // ),
-      actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset(
-            "assets/icons/search.svg",
-            // By default our  icon color is white
-            color: kTextColor,
-          ),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: SvgPicture.asset(
-            "assets/icons/cart.svg",
-            // By default our  icon color is white
-            color: kTextColor,
-          ),
-          onPressed: () {},
-        ),
-        SizedBox(width: kDefaultPaddin / 2)
-      ],
+      // actions: <Widget>[
+      //   IconButton(
+      //     icon: SvgPicture.asset(
+      //       "assets/icons/search.svg",
+      //       // By default our  icon color is white
+      //       color: kTextColor,
+      //     ),
+      //     onPressed: () {},
+      //   ),
+      //   IconButton(
+      //     icon: SvgPicture.asset(
+      //       "assets/icons/cart.svg",
+      //       // By default our  icon color is white
+      //       color: kTextColor,
+      //     ),
+      //     onPressed: () {},
+      //   ),
+      //   SizedBox(width: kDefaultPaddin / 2)
+      // ],
     );
   }
 
