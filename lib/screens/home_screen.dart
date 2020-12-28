@@ -1,11 +1,9 @@
-import 'package:book_shop/constants.dart';
+import 'file:///D:/flutterProject/book_shop/lib/screens/audio/audio_screen.dart';
+import 'package:book_shop/screens/Home/book_screen_home.dart';
 import 'package:book_shop/screens/article.dart';
-import 'package:book_shop/screens/audio_book.dart';
-import 'package:book_shop/screens/books/book_screen.dart';
+import 'package:book_shop/screens/book/bookListBody.dart';
 import 'package:book_shop/screens/events/event_screen.dart';
-import 'package:book_shop/screens/home/components/body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,12 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 2;
+  int selectedIndex = 0;
 
   List<Widget> listWidgets = [
-    Body(),
-    AudioBook(),
-    TextBook(),
+    BookScreenHome(),
+    BookListBody(),
+    AudioScreen(),
     Article(),
     EventScreen()
   ];
@@ -31,12 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: listWidgets[selectedIndex],
       bottomNavigationBar: ConvexAppBar(
         items: [
+          TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.book, title: 'Text Book'),
           TabItem(icon: Icons.audiotrack, title: 'Audio Book'),
-          TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.article, title: 'Articles'),
           TabItem(icon: Icons.event, title: 'Events'),
-          //TabItem(icon: Icons.event, title: 'Fan Club'),
         ],
         initialActiveIndex: selectedIndex, //optional, default as 0
         color: Colors.black,

@@ -1,12 +1,12 @@
 import 'package:book_shop/models/Product.dart';
-import 'package:book_shop/screens/details/details_screen.dart';
-import 'package:book_shop/screens/home/components/item_card.dart';
+import 'package:book_shop/screens/book/components/item_card.dart';
+import 'file:///D:/flutterProject/book_shop/lib/screens/book/details/details_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
-import 'categorries.dart';
+import '../../constants.dart';
+import 'components/categorries.dart';
 
-class Body extends StatelessWidget {
+class BookListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,16 +14,6 @@ class Body extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 110),
-          //   child: Text(
-          //     "Book Shop",
-          //     style: Theme.of(context)
-          //         .textTheme
-          //         .headline5
-          //         .copyWith(fontWeight: FontWeight.bold),
-          //   ),
-          // ),
           Categories(),
           Expanded(
             child: Padding(

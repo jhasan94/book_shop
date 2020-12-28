@@ -1,6 +1,5 @@
 import 'package:book_shop/constants.dart';
 import 'package:book_shop/models/Product.dart';
-import 'package:book_shop/screens/details/components/cart_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

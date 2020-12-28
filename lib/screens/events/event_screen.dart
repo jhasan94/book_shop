@@ -1,9 +1,9 @@
 import 'package:book_shop/data/data.dart';
-import 'file:///D:/flutterProject/book_shop/lib/screens/events/components/dateTile.dart';
-import 'file:///D:/flutterProject/book_shop/lib/screens/events/components/eventTile.dart';
 import 'package:book_shop/models/event_model/date_model.dart';
 import 'package:book_shop/models/event_model/event_type_model.dart';
 import 'package:book_shop/models/event_model/events_model.dart';
+import 'package:book_shop/screens/events/components/dateTile.dart';
+import 'package:book_shop/screens/events/components/eventTile.dart';
 import 'package:book_shop/screens/events/components/popular_eventTile.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,6 @@ class _HomeScreenState extends State<EventScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dates = getDates();
     eventsType = getEventTypes();
@@ -47,13 +46,6 @@ class _HomeScreenState extends State<EventScreen> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          // Image.asset(
-                          //   "assets/images/events/logo.png",
-                          //   height: 28,
-                          // ),
-                          // SizedBox(
-                          //   width: 8,
-                          // ),
                           Row(
                             children: <Widget>[
                               Text(
@@ -87,17 +79,6 @@ class _HomeScreenState extends State<EventScreen> {
                                   width: 30,
                                 )),
                           )
-                          // Image.asset(
-                          //   "assets/images/events/notify.png",
-                          //   height: 22,
-                          // ),
-                          // SizedBox(
-                          //   width: 16,
-                          // ),
-                          // Image.asset(
-                          //   "assets/images/events/menu.png",
-                          //   height: 22,
-                          // )
                         ],
                       ),
                       SizedBox(
@@ -125,21 +106,6 @@ class _HomeScreenState extends State<EventScreen> {
                               )
                             ],
                           ),
-                          // Spacer(),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     border: Border.all(
-                          //         width: 3, color: Color(0xffFAE072)),
-                          //     borderRadius: BorderRadius.circular(30),
-                          //   ),
-                          //   child: ClipRRect(
-                          //       borderRadius: BorderRadius.circular(30),
-                          //       child: Image.asset(
-                          //         "assets/images/events/jahid.jpg",
-                          //         height: 40,
-                          //         width: 40,
-                          //       )),
-                          // )
                         ],
                       ),
                       SizedBox(

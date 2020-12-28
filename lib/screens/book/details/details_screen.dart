@@ -1,6 +1,6 @@
 import 'package:book_shop/constants.dart';
 import 'package:book_shop/models/Product.dart';
-import 'package:book_shop/screens/details/components/body.dart';
+import 'file:///D:/flutterProject/book_shop/lib/screens/book/details/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

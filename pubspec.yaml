@@ -31,6 +31,8 @@ dependencies:
   flutter_svg: ^0.18.0
   convex_bottom_bar: ^2.6.0
   carousel_pro: ^1.0.0
+  audioplayers: ^0.17.0
+  provider: ^4.3.2+3
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,7 @@ flutter:
     - assets/images/events/
     - assets/images/coverphoto/
     - assets/icons/
+    - assets/images/audio/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
