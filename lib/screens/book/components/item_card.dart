@@ -17,7 +17,7 @@ class ItemCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: Container(
@@ -35,15 +35,60 @@ class ItemCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
             child: Text(
-              // products is out demo list
-              product.title,
-              style: TextStyle(color: kTextLightColor),
+              product.bookTitle,
+              style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Text(
-            "\$${product.price}",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )
+            "${product.authorname}",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "TK ${product.price}",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.lineThrough),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "TK ${product.discountPrice}",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          SizedBox(
+            height: 40,
+            width: 180,
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              color: product.color,
+              onPressed: () {},
+              child: Text(
+                "Add to Cart".toUpperCase(),
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

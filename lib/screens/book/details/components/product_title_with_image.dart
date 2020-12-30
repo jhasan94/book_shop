@@ -22,34 +22,60 @@ class ProductTitleWithImage extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            product.title,
+            product.bookTitle,
             style: Theme.of(context)
                 .textTheme
-                .headline4
+                .headline5
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          //SizedBox(height: kDefaultPaddin / 2),
+          Text(
+            product.authorname,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: kDefaultPaddin / 2),
           Row(
             children: <Widget>[
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "Price\n"),
                     TextSpan(
-                      text: "\$${product.price}",
-                      style: Theme.of(context).textTheme.headline4.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                        text: "Price\n",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.yellowAccent,
+                        )),
+                    TextSpan(
+                      text: "TK ${product.price}\n",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 18,
+                          decoration: TextDecoration.lineThrough),
+                    ),
+                    TextSpan(
+                      text: "TK ${product.price}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: kDefaultPaddin),
+              SizedBox(width: kDefaultPaddin * 5),
               Expanded(
                 child: Hero(
                   tag: "${product.id}",
                   child: Image.asset(
                     product.image,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.fill,
+                    height: 270,
+                    //width: 70,
                   ),
                 ),
               )

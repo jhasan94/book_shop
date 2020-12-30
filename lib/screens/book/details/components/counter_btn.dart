@@ -1,4 +1,4 @@
-import 'file:///D:/flutterProject/book_shop/lib/screens/book/details/components/cart_counter.dart';
+import 'package:book_shop/screens/book/details/components/cart_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,9 +10,9 @@ class CounterWithFavBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CartCounter(),
+        //CartCounter(),
       ],
     );
   }

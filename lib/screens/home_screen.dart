@@ -1,8 +1,9 @@
-import 'file:///D:/flutterProject/book_shop/lib/screens/audio/audio_screen.dart';
+import 'file:///D:/flutterProject/book_shop/lib/screens/article/article_screen.dart';
 import 'package:book_shop/screens/Home/book_screen_home.dart';
-import 'package:book_shop/screens/article.dart';
+import 'package:book_shop/screens/audio/audio_list_screen.dart';
 import 'package:book_shop/screens/book/bookListBody.dart';
 import 'package:book_shop/screens/events/event_screen.dart';
+import 'package:book_shop/screens/sizas_center/sizas_center_home.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
@@ -17,28 +18,32 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> listWidgets = [
     BookScreenHome(),
     BookListBody(),
-    AudioScreen(),
-    Article(),
-    EventScreen()
+    AudioListScreen(),
+    SizasCenter(),
+    EventScreen(),
+    ArticleScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      //appBar: buildAppBar(),
       body: listWidgets[selectedIndex],
       bottomNavigationBar: ConvexAppBar(
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.book, title: 'Text Book'),
-          TabItem(icon: Icons.audiotrack, title: 'Audio Book'),
-          TabItem(icon: Icons.article, title: 'Articles'),
+          TabItem(icon: Icons.book, title: 'Book'),
+          TabItem(icon: Icons.audiotrack, title: 'Audio'),
+          TabItem(icon: Icons.group, title: 'Center'),
           TabItem(icon: Icons.event, title: 'Events'),
+          TabItem(icon: Icons.article, title: 'Article'),
         ],
         initialActiveIndex: selectedIndex, //optional, default as 0
         color: Colors.black,
         backgroundColor: Colors.amber,
         onTap: onItemTapped,
+        height: 50,
+        top: 0,
       ),
     );
   }

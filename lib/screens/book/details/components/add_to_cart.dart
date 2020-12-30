@@ -1,5 +1,6 @@
 import 'package:book_shop/constants.dart';
 import 'package:book_shop/models/Product.dart';
+import 'package:book_shop/screens/book/details/components/cart_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,24 +17,29 @@ class AddToCart extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
       child: Row(
+        //crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: kDefaultPaddin),
-            height: 50,
-            width: 58,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: product.color,
-              ),
-            ),
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/add_to_cart.svg",
-                color: product.color,
-              ),
-              onPressed: () {},
-            ),
+          // Container(
+          //   margin: EdgeInsets.only(right: kDefaultPaddin),
+          //   height: 50,
+          //   width: 58,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(18),
+          //     border: Border.all(
+          //       color: product.color,
+          //     ),
+          //   ),
+          //   child: IconButton(
+          //     icon: SvgPicture.asset(
+          //       "assets/icons/add_to_cart.svg",
+          //       color: product.color,
+          //     ),
+          //     onPressed: () {},
+          //   ),
+          // ),
+          CartCounter(),
+          SizedBox(
+            width: kDefaultPaddin,
           ),
           Expanded(
             child: SizedBox(
@@ -44,7 +50,7 @@ class AddToCart extends StatelessWidget {
                 color: product.color,
                 onPressed: () {},
                 child: Text(
-                  "Buy  Now".toUpperCase(),
+                  "Add to Cart".toUpperCase(),
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,

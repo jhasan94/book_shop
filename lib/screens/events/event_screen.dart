@@ -1,3 +1,4 @@
+import 'package:book_shop/constants.dart';
 import 'package:book_shop/data/data.dart';
 import 'package:book_shop/models/event_model/date_model.dart';
 import 'package:book_shop/models/event_model/event_type_model.dart';
@@ -31,7 +32,8 @@ class _HomeScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: Padding(
+        padding: EdgeInsets.only(top: kDefaultPaddin),
         child: Stack(
           children: <Widget>[
             Container(
@@ -108,50 +110,50 @@ class _HomeScreenState extends State<EventScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-
-                      /// Dates
-                      Container(
-                        height: 60,
-                        child: ListView.builder(
-                            itemCount: dates.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return DateTile(
-                                weekDay: dates[index].weekDay,
-                                date: dates[index].date,
-                                isSelected: todayDateIs == dates[index].date,
-                              );
-                            }),
-                      ),
-
-                      /// Events
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        "All Events",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        height: 100,
-                        child: ListView.builder(
-                            itemCount: eventsType.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return EventTile(
-                                imgAssetPath: eventsType[index].imgAssetPath,
-                                eventType: eventsType[index].eventType,
-                              );
-                            }),
-                      ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      //
+                      // /// Dates
+                      // Container(
+                      //   height: 60,
+                      //   child: ListView.builder(
+                      //       itemCount: dates.length,
+                      //       shrinkWrap: true,
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemBuilder: (context, index) {
+                      //         return DateTile(
+                      //           weekDay: dates[index].weekDay,
+                      //           date: dates[index].date,
+                      //           isSelected: todayDateIs == dates[index].date,
+                      //         );
+                      //       }),
+                      // ),
+                      //
+                      // /// Events
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Text(
+                      //   "All Events",
+                      //   style: TextStyle(color: Colors.white, fontSize: 20),
+                      // ),
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Container(
+                      //   height: 100,
+                      //   child: ListView.builder(
+                      //       itemCount: eventsType.length,
+                      //       shrinkWrap: true,
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemBuilder: (context, index) {
+                      //         return EventTile(
+                      //           imgAssetPath: eventsType[index].imgAssetPath,
+                      //           eventType: eventsType[index].eventType,
+                      //         );
+                      //       }),
+                      // ),
 
                       /// Popular Events
                       SizedBox(
