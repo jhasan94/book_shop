@@ -3,8 +3,6 @@ import 'package:book_shop/data/data.dart';
 import 'package:book_shop/models/event_model/date_model.dart';
 import 'package:book_shop/models/event_model/event_type_model.dart';
 import 'package:book_shop/models/event_model/events_model.dart';
-import 'package:book_shop/screens/events/components/dateTile.dart';
-import 'package:book_shop/screens/events/components/eventTile.dart';
 import 'package:book_shop/screens/events/components/popular_eventTile.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +30,9 @@ class _HomeScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildAppBar(),
       body: Padding(
-        padding: EdgeInsets.only(top: kDefaultPaddin),
+        padding: EdgeInsets.only(top: 0),
         child: Stack(
           children: <Widget>[
             Container(
@@ -193,4 +192,18 @@ class _HomeScreenState extends State<EventScreen> {
       ),
     );
   }
+}
+
+AppBar buildAppBar() {
+  return AppBar(
+    backgroundColor: Colors.amber,
+    elevation: 0,
+    title: Text(
+      "Events",
+      style: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
 }

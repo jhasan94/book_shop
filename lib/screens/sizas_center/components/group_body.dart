@@ -1,4 +1,5 @@
 import 'package:book_shop/models/sizas_center_member_model/group_name.dart';
+import 'package:book_shop/screens/sizas_center/components/group_details_body.dart';
 import 'package:book_shop/screens/sizas_center/components/group_list.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class GroupBody extends StatelessWidget {
                         press: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => GroupBody(
+                              builder: (context) => GroupDetailsBody(
                                   //product: books[index],
                                   ),
                             )),
