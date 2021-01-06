@@ -1,8 +1,7 @@
 import 'package:book_shop/constants.dart';
 import 'package:book_shop/data/data.dart';
-import 'package:book_shop/models/event_model/date_model.dart';
-import 'package:book_shop/models/event_model/event_type_model.dart';
 import 'package:book_shop/models/event_model/events_model.dart';
+import 'package:book_shop/screens/events/components/categorries.dart';
 import 'package:book_shop/screens/events/components/popular_eventTile.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +11,6 @@ class EventScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<EventScreen> {
-  List<DateModel> dates = new List<DateModel>();
-  List<EventTypeModel> eventsType = new List();
   List<EventsModel> events = new List<EventsModel>();
 
   String todayDateIs = "12";
@@ -21,8 +18,6 @@ class _HomeScreenState extends State<EventScreen> {
   @override
   void initState() {
     super.initState();
-    dates = getDates();
-    eventsType = getEventTypes();
     events = getEvents();
   }
 
@@ -162,6 +157,10 @@ class _HomeScreenState extends State<EventScreen> {
                         "Popular Events",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Categories(),
                       SizedBox(
                         height: 16,
                       ),

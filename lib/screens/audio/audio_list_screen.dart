@@ -41,7 +41,7 @@ AppBar buildAppBar() {
     backgroundColor: Colors.amber,
     elevation: 0,
     title: Text(
-      "Book Shop",
+      "Audio",
       style: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,

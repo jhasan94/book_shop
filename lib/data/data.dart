@@ -1,90 +1,5 @@
-import 'package:book_shop/models/event_model/date_model.dart';
-import 'package:book_shop/models/event_model/event_type_model.dart';
 import 'package:book_shop/models/event_model/events_model.dart';
-
-List<DateModel> getDates() {
-  List<DateModel> dates = new List<DateModel>();
-  DateModel dateModel = new DateModel();
-
-  //1
-  dateModel.date = "10";
-  dateModel.weekDay = "Sun";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "11";
-  dateModel.weekDay = "Mon";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "12";
-  dateModel.weekDay = "Tue";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "13";
-  dateModel.weekDay = "Wed";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "14";
-  dateModel.weekDay = "Thu";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "15";
-  dateModel.weekDay = "Fri";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  //1
-  dateModel.date = "16";
-  dateModel.weekDay = "Sat";
-  dates.add(dateModel);
-
-  dateModel = new DateModel();
-
-  return dates;
-}
-
-List<EventTypeModel> getEventTypes() {
-  List<EventTypeModel> events = new List();
-  EventTypeModel eventModel = new EventTypeModel();
-
-  //1
-  eventModel.imgAssetPath = "assets/images/events/education.png";
-  eventModel.eventType = "Education";
-  events.add(eventModel);
-
-  eventModel = new EventTypeModel();
-
-  //1
-  eventModel.imgAssetPath = "assets/images/events/concert.png";
-  eventModel.eventType = "Concert";
-  events.add(eventModel);
-
-  eventModel = new EventTypeModel();
-
-  //1
-  eventModel.imgAssetPath = "assets/images/events/sports.png";
-  eventModel.eventType = "Sports";
-  events.add(eventModel);
-
-  eventModel = new EventTypeModel();
-
-  return events;
-}
+import 'package:book_shop/models/event_model/past_event_model.dart';
 
 List<EventsModel> getEvents() {
   List<EventsModel> events = new List<EventsModel>();
@@ -118,4 +33,28 @@ List<EventsModel> getEvents() {
   eventsModel = new EventsModel();
 
   return events;
+}
+
+List<PastEventModel> getPastEvent() {
+  List<PastEventModel> pastEvents = new List<PastEventModel>();
+  PastEventModel pastEventModel = new PastEventModel();
+  //1
+  pastEventModel.imgeAssetPath = "assets/images/events/sport.jpg";
+  pastEventModel.date = "feb 12, 2021";
+  pastEventModel.desc = "Global Sports Day";
+  pastEventModel.address = "Dhaka, Bangladesh";
+  pastEvents.add(pastEventModel);
+
+  pastEventModel = new PastEventModel();
+
+  //2
+  pastEventModel.imgeAssetPath = "assets/images/events/sport.jpg";
+  pastEventModel.date = "feb 12, 2021";
+  pastEventModel.desc = "Global Sports Day";
+  pastEventModel.address = "Dhaka, Bangladesh";
+  pastEvents.add(pastEventModel);
+
+  pastEventModel = new PastEventModel();
+
+  return pastEvents;
 }

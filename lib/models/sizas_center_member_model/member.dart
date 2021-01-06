@@ -13,28 +13,28 @@ class Member {
 
 List<Member> member = [
   Member(
-    name: "jahid",
-    address: "demra",
-    contactNo: "01521258929",
+    name: "Name",
+    address: "xxxxxx",
+    contactNo: "00000000000",
   ),
   Member(
-    name: "hasan",
-    address: "dhaka",
-    contactNo: "01521258929",
+    name: "Name",
+    address: "xxxxxx",
+    contactNo: "00000000000",
   ),
   Member(
-    name: "sakib",
-    address: "barishal",
-    contactNo: "01521258929",
+    name: "Name",
+    address: "xxxxxx",
+    contactNo: "00000000000",
   ),
   Member(
-    name: "alam",
-    address: "quater",
-    contactNo: "01521258929",
+    name: "Name",
+    address: "xxxxxx",
+    contactNo: "00000000000",
   ),
   Member(
-    name: "jahid",
-    address: "demra",
-    contactNo: "01521258929",
+    name: "Name",
+    address: "xxxxxx",
+    contactNo: "00000000000",
   ),
 ];

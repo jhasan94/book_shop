@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.amber,
       elevation: 0,
       title: Text(
-        "Book Shop",
+        "Siddiknogori",
         style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
