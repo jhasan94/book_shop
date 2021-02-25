@@ -1,12 +1,14 @@
-import 'file:///D:/flutterProject/book_shop/lib/screens/article/components/description.dart';
-import 'package:book_shop/models/article_model.dart';
+import 'package:book_shop/api.dart';
+import 'package:book_shop/screens/article/components/description.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DetailsArticleBody extends StatelessWidget {
-  final Article article;
+  var articleTitle, imgUrl, des;
 
-  const DetailsArticleBody({Key key, this.article}) : super(key: key);
+  DetailsArticleBody({Key key, this.articleTitle, this.imgUrl, this.des})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +22,30 @@ class DetailsArticleBody extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    height: 196.5,
-                    //width: double.infinity,
-                    child: Image.asset(article.img),
-                  ),
+                      height: 196.5,
+                      //width: double.infinity,
+                      child: CachedNetworkImage(
+                        imageUrl: Api.imgDir + imgUrl,
+                        // placeholder: (context, url) =>
+                        //     Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        height: 100,
+                        //width: 120,
+                        fit: BoxFit.cover,
+                      )
+                      // Image.network(
+                      //   Api.imgDir + imgUrl,
+                      //   height: 100,
+                      //   width: 120,
+                      //   fit: BoxFit.cover,
+                      // ),
+                      ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  article.title,
+                  articleTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     height: 1.5,
@@ -39,7 +55,7 @@ class DetailsArticleBody extends StatelessWidget {
                   ),
                 ),
               ),
-              Description(article: article)
+              Description(des: des)
             ],
           ),
         ),

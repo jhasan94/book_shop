@@ -1,48 +1,73 @@
-import 'package:book_shop/models/Product.dart';
+import 'package:book_shop/controllers/controller.dart';
+import 'package:book_shop/models/e_book_model.dart';
 import 'package:book_shop/screens/book/components/item_card.dart';
 import 'file:///D:/flutterProject/book_shop/lib/screens/book/details/details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../constants.dart';
-import 'components/categorries.dart';
+import 'package:get/get.dart';
 
 class BookListBody extends StatelessWidget {
+  final Controller controller = Get.put(Controller());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
       backgroundColor: Colors.white54,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          //Categories(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddin, vertical: kDefaultPaddin),
-              child: GridView.builder(
-                  itemCount: products.length,
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: kDefaultPaddin * 2,
-                    crossAxisSpacing: kDefaultPaddin,
-                    childAspectRatio: 0.65,
-                  ),
-                  itemBuilder: (context, index) => ItemCard(
-                        product: products[index],
-                        press: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailsScreen(
-                                product: products[index],
-                              ),
-                            )),
-                      )),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("assets/images/coverphoto/back.png"),
+          fit: BoxFit.cover,
+        )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                  child: Obx(() {
+                    if (controller.isLoading.value)
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    else
+                      return GridView.builder(
+                          itemCount: controller.eBookList.first.data.length,
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio: 0.85,
+                          ),
+                          itemBuilder: (context, index) {
+                            var eBook = controller.eBookList.first.data[index];
+                            var a = eBook.size / 1000000;
+                            return ItemCard(
+                              id: eBook.id,
+                              img: eBook.coverPhoto,
+                              title: eBook.title,
+                              author_name: eBook.author,
+                              press: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen1(
+                                      size: (eBook.size / 1000000),
+                                      price: eBook.price,
+                                      des: eBook.description,
+                                      title: eBook.title,
+                                      img: eBook.coverPhoto,
+                                      id: eBook.id,
+                                      authorname: eBook.author,
+                                      pdfurl: eBook.file,
+                                    ),
+                                  )),
+                            );
+                          });
+                  })),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -59,18 +84,5 @@ AppBar buildAppBar(BuildContext context) {
       ),
     ),
     elevation: 0,
-    actions: <Widget>[
-      IconButton(
-        icon: SvgPicture.asset("assets/icons/cart.svg"),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: SvgPicture.asset(
-          "assets/icons/profile.svg",
-        ),
-        onPressed: () {},
-      ),
-      SizedBox(width: kDefaultPaddin / 2)
-    ],
   );
 }

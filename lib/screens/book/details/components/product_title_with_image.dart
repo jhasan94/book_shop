@@ -1,14 +1,21 @@
+import 'package:book_shop/api.dart';
 import 'package:book_shop/constants.dart';
-import 'package:book_shop/models/Product.dart';
+import 'package:book_shop/screens/book/details/pdf_viewer.dart';
 import 'package:flutter/material.dart';
 
 class ProductTitleWithImage extends StatelessWidget {
-  const ProductTitleWithImage({
-    Key key,
-    @required this.product,
-  }) : super(key: key);
+  final title, authorName, id, img, price, pdfsize, pdfurl;
 
-  final Product product;
+  const ProductTitleWithImage(
+      {Key key,
+      this.title,
+      this.pdfurl,
+      this.authorName,
+      this.pdfsize,
+      this.price,
+      this.id,
+      this.img})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,24 +25,46 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Islamic Book",
+            "Book Title",
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            product.bookTitle,
+            title,
             style: Theme.of(context)
                 .textTheme
                 .headline5
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Text(
-            product.authorname,
+            authorName,
             style: Theme.of(context)
                 .textTheme
                 .headline6
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: kDefaultPaddin / 2),
+          SizedBox(height: kDefaultPaddin),
+          FlatButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            color: Colors.red,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PdfViewer(
+                      pdfUrl: pdfurl,
+                    ),
+                  ));
+            },
+            child: Text(
+              "Reading Book".toUpperCase(),
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
           Row(
             children: <Widget>[
               RichText(
@@ -48,16 +77,16 @@ class ProductTitleWithImage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.yellowAccent,
                         )),
+                    // TextSpan(
+                    //   text: "TK ${product.price}\n",
+                    //   style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.white,
+                    //       fontSize: 18,
+                    //       decoration: TextDecoration.lineThrough),
+                    // ),
                     TextSpan(
-                      text: "TK ${product.price}\n",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 18,
-                          decoration: TextDecoration.lineThrough),
-                    ),
-                    TextSpan(
-                      text: "TK ${product.price}",
+                      text: "TK ${price}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -69,18 +98,30 @@ class ProductTitleWithImage extends StatelessWidget {
               ),
               SizedBox(width: kDefaultPaddin * 5),
               Expanded(
-                child: Hero(
-                  tag: "${product.id}",
-                  child: Image.asset(
-                    product.image,
-                    fit: BoxFit.fill,
-                    height: 350,
-                    //width: 70,
-                  ),
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: "${id}",
+                      child: Image.network(
+                        Api.imgDir + img,
+                        fit: BoxFit.fill,
+                        height: 250,
+                        //width: 70,
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                          text: "Size ${pdfsize.toStringAsFixed(2)} MB",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          )),
+                    ),
+                  ],
                 ),
               )
             ],
-          )
+          ),
         ],
       ),
     );

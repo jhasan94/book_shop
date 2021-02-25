@@ -1,4 +1,4 @@
-import 'file:///D:/flutterProject/book_shop/lib/screens/article/components/article_body.dart';
+import 'package:book_shop/screens/article/components/article_body.dart';
 import 'package:flutter/material.dart';
 
 class ArticleScreen extends StatelessWidget {

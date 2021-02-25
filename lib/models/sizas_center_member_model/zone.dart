@@ -11,19 +11,25 @@ List<Zone> zone = [
     zoneName: "Dhaka",
   ),
   Zone(
-    zoneName: "Barishal",
+    zoneName: "Chittagong",
   ),
   Zone(
-    zoneName: "Sylhet",
-  ),
-  Zone(
-    zoneName: "Chattogram",
+    zoneName: "Barisal",
   ),
   Zone(
     zoneName: "Khulna",
   ),
   Zone(
+    zoneName: "Mymensingh",
+  ),
+  Zone(
     zoneName: "Rajshahi",
+  ),
+  Zone(
+    zoneName: "Rangpur",
+  ),
+  Zone(
+    zoneName: "Sylhet",
   ),
   Zone(
     zoneName: "India",

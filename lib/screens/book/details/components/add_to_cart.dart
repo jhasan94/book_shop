@@ -1,17 +1,8 @@
 import 'package:book_shop/constants.dart';
-import 'package:book_shop/models/Product.dart';
 import 'package:book_shop/screens/book/details/components/cart_counter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AddToCart extends StatelessWidget {
-  const AddToCart({
-    Key key,
-    @required this.product,
-  }) : super(key: key);
-
-  final Product product;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,7 +38,7 @@ class AddToCart extends StatelessWidget {
               child: FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
-                color: product.color,
+                color: Colors.red,
                 onPressed: () {},
                 child: Text(
                   "Add to Cart".toUpperCase(),

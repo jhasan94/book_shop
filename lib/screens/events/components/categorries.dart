@@ -1,4 +1,7 @@
+import 'package:book_shop/controllers/controller.dart';
+import 'package:book_shop/screens/events/components/popular_eventTile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants.dart';
 
@@ -12,6 +15,8 @@ class _CategoriesState extends State<Categories> {
     "Upcoming events",
     "Past events",
   ];
+  final Controller controller = Get.put(Controller());
+  String todayDateIs = "12";
   // By default our first item will be selected
   int selectedIndex = 0;
   @override
@@ -57,7 +62,28 @@ class _CategoriesState extends State<Categories> {
               color: selectedIndex == index
                   ? Colors.amberAccent
                   : Colors.transparent,
-            )
+            ),
+            Expanded(
+              child: Container(child: Obx(() {
+                if (controller.isLoading.value)
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                else
+                  return ListView.builder(
+                      itemCount: controller.eventList.first.data.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        var event = controller.eventList.first.data[index];
+                        return PopularEventTile(
+                          desc: event.name,
+                          date: event.createdAt.toString(),
+                          address: "address",
+                        );
+                      });
+              })),
+            ),
           ],
         ),
       ),

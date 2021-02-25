@@ -5,7 +5,11 @@ class ZoneList extends StatelessWidget {
   final Zone zone;
   final Function press;
 
-  const ZoneList({Key key, this.zone, this.press}) : super(key: key);
+  const ZoneList({
+    Key key,
+    this.zone,
+    this.press,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

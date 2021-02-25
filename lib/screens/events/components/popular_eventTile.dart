@@ -1,3 +1,7 @@
+import 'package:book_shop/api.dart';
+import 'package:book_shop/models/event_model.dart';
+import 'package:book_shop/size_config.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PopularEventTile extends StatelessWidget {
@@ -7,14 +11,13 @@ class PopularEventTile extends StatelessWidget {
   String imgeAssetPath;
 
   PopularEventTile({this.address, this.date, this.imgeAssetPath, this.desc});
-//Color(0xff29404E)
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      margin: EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
-          color: Colors.black26, borderRadius: BorderRadius.circular(8)),
+          color: Colors.green, borderRadius: BorderRadius.circular(8)),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -70,15 +73,24 @@ class PopularEventTile extends StatelessWidget {
             ),
           ),
           ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8)),
-              child: Image.asset(
-                imgeAssetPath,
-                height: 100,
-                width: 120,
-                fit: BoxFit.cover,
-              )),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
+            child: CachedNetworkImage(
+              imageUrl: Api.imgDir + "1611795161.jpg",
+              // placeholder: (context, url) =>
+              //     Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              height: 100,
+              width: 120,
+              fit: BoxFit.cover,
+            ),
+            // Image.network(
+            //   Api.imgDir + "1611795161.jpg",
+            //   height: 100,
+            //   width: 120,
+            //   fit: BoxFit.cover,
+            // )
+          ),
         ],
       ),
     );

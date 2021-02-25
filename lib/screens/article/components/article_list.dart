@@ -1,11 +1,13 @@
-import 'package:book_shop/models/article_model.dart';
+import 'package:book_shop/api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ArticleList extends StatelessWidget {
-  final Article article;
+  var articleTitle, imgUrl;
   final Function press;
 
-  const ArticleList({Key key, this.article, this.press}) : super(key: key);
+  ArticleList({Key key, this.articleTitle, this.imgUrl, this.press})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -26,7 +28,7 @@ class ArticleList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      article.title,
+                      articleTitle,
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     SizedBox(
@@ -42,7 +44,7 @@ class ArticleList extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          article.date,
+                          "1/1/21",
                           style: TextStyle(color: Colors.white, fontSize: 10),
                         )
                       ],
@@ -50,21 +52,6 @@ class ArticleList extends StatelessWidget {
                     SizedBox(
                       height: 4,
                     ),
-                    // Row(
-                    //   children: <Widget>[
-                    //     Image.asset(
-                    //       "assets/images/events/location.png",
-                    //       height: 12,
-                    //     ),
-                    //     SizedBox(
-                    //       width: 8,
-                    //     ),
-                    //     Text(
-                    //       address,
-                    //       style: TextStyle(color: Colors.white, fontSize: 10),
-                    //     )
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -73,12 +60,22 @@ class ArticleList extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(8),
                     bottomRight: Radius.circular(8)),
-                child: Image.asset(
-                  article.img,
+                child: CachedNetworkImage(
+                  imageUrl: Api.imgDir + imgUrl,
+                  // placeholder: (context, url) =>
+                  //     Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                   height: 100,
                   width: 120,
                   fit: BoxFit.cover,
-                )),
+                )
+                // Image.network(
+                //   Api.imgDir + imgUrl,
+                //   height: 100,
+                //   width: 120,
+                //   fit: BoxFit.cover,
+                // )
+                ),
           ],
         ),
       ),
