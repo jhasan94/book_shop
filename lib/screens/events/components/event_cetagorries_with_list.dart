@@ -1,5 +1,5 @@
 import 'package:book_shop/controllers/controller.dart';
-import 'package:book_shop/screens/events/components/popular_eventTile.dart';
+import 'package:book_shop/screens/events/components/eventTile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

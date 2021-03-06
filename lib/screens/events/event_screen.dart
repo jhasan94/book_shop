@@ -1,4 +1,4 @@
-import 'package:book_shop/screens/events/components/event_cetagorries_list.dart';
+import 'package:book_shop/screens/events/components/event_cetagorries_with_list.dart';
 import 'package:flutter/material.dart';
 
 class EventScreen extends StatelessWidget {

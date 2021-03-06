@@ -3,16 +3,16 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:book_shop/api.dart';
 import 'package:flutter/material.dart';
 
-class MusicApp extends StatefulWidget {
+class AudioPage extends StatefulWidget {
   final img, title, audioUrl;
 
-  const MusicApp({Key key, this.img, this.title, this.audioUrl})
+  const AudioPage({Key key, this.img, this.title, this.audioUrl})
       : super(key: key);
   @override
-  _MusicAppState createState() => _MusicAppState();
+  _AudioPageState createState() => _AudioPageState();
 }
 
-class _MusicAppState extends State<MusicApp> {
+class _AudioPageState extends State<AudioPage> {
   //we will need some variables
   bool playing = false; // at the begining we are not playing any song
   IconData playBtn = Icons.play_arrow; // the main state of the play button icon
@@ -174,11 +174,6 @@ class _MusicAppState extends State<MusicApp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        //Let's start by adding the controller
-                        //let's add the time indicator text
-                        // (isLoading == true)
-                        //     ? CircularProgressIndicator()
-                        //     :
                         Container(
                           width: 500.0,
                           child: Row(

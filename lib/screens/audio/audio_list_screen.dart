@@ -37,7 +37,7 @@ class AudioListScreen extends StatelessWidget {
                             press: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MusicApp(
+                                  builder: (context) => AudioPage(
                                     img: audio.coverPhoto,
                                     title: audio.title,
                                     audioUrl: audio.audioOrginal,

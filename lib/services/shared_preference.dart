@@ -20,13 +20,11 @@ class SharedPref {
   }
 
   setString(String key, value) async {
-    print("set string called.....");
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
 
   getString(String key) async {
-    print("set string called.....");
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(key);
   }

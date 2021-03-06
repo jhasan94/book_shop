@@ -13,6 +13,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class Controller extends GetxController {
   //List of model class........
@@ -23,6 +25,13 @@ class Controller extends GetxController {
   final audioList = [].obs;
   final memberList = [].obs;
   var isLoading = true.obs;
+  Box box;
+
+  var article;
+  var homePage;
+  var eBook;
+  var audio;
+  var event;
 
   //login reg btn ..............
   var btnNameLogin = "Login".obs;
@@ -103,67 +112,6 @@ class Controller extends GetxController {
     }
   }
 
-  // Future loadSharedPrefsArticle() async {
-  //   try {
-  //     var article = Article.fromJson(await sharedPref.read("article"));
-  //     print("data found");
-  //     articleList.assign(article);
-  //     sharedPref.setString(
-  //         "articleUpdateTime", articleList.first.data[0].updatedAt.toString());
-  //     print(article.total.toString());
-  //   } catch (Exception) {
-  //     print("data not found");
-  //   }
-  // }
-  //
-  // Future loadSharedPrefsHomePage() async {
-  //   try {
-  //     var homePage = Article.fromJson(await sharedPref.read("homePage"));
-  //     print("data found");
-  //     homePageList.assign(homePage);
-  //     sharedPref.setString("homePageUpdateTime",
-  //         homePageList.first.data[0].updatedAt.toString());
-  //   } catch (Exception) {
-  //     print("data not found");
-  //   }
-  // }
-  //
-  // Future loadSharedPrefsEvent() async {
-  //   try {
-  //     var event = Event.fromJson(await sharedPref.read("event"));
-  //     print("data found");
-  //     eventList.assign(event);
-  //     sharedPref.setString(
-  //         "eventUpdateTime", eventList.first.data[0].updatedAt.toString());
-  //   } catch (Exception) {
-  //     print("data not found");
-  //   }
-  // }
-  //
-  // Future loadSharedPrefsEBook() async {
-  //   try {
-  //     var eBook = EBook.fromJson(await sharedPref.read("eBook"));
-  //     print("data found");
-  //     eBookList.assign(eBook);
-  //     sharedPref.setString(
-  //         "eBookUpdateTime", eBookList.first.data[0].updatedAt.toString());
-  //   } catch (Exception) {
-  //     print("data not found");
-  //   }
-  // }
-  //
-  // Future loadSharedPrefsAudio() async {
-  //   try {
-  //     var audio = Audio.fromJson(await sharedPref.read("audio"));
-  //     print("data found");
-  //     audioList.assign(audio);
-  //     sharedPref.setString(
-  //         "audioUpdateTime", audioList.first.data[0].updatedAt.toString());
-  //   } catch (Exception) {
-  //     print("data not found");
-  //   }
-  // }
-
   @override
   void onInit() {
     fetchHomepage();
@@ -180,7 +128,7 @@ class Controller extends GetxController {
     int timeout = 5;
 
     var client = http.Client();
-    var article;
+
     String url = Api.article_url;
     final prefs = await SharedPreferences.getInstance();
 
@@ -224,7 +172,7 @@ class Controller extends GetxController {
     int timeout = 5;
 
     var client = http.Client();
-    var homePage;
+
     String url = Api.home_url;
     final prefs = await SharedPreferences.getInstance();
 
@@ -263,7 +211,7 @@ class Controller extends GetxController {
     int timeout = 5;
 
     var client = http.Client();
-    var eBook;
+
     String url = Api.ebook_url;
     final prefs = await SharedPreferences.getInstance();
 
@@ -301,7 +249,7 @@ class Controller extends GetxController {
     int timeout = 5;
 
     var client = http.Client();
-    var audio;
+
     String url = Api.Audio_url;
     final prefs = await SharedPreferences.getInstance();
 
@@ -359,7 +307,6 @@ class Controller extends GetxController {
     int timeout = 5;
 
     var client = http.Client();
-    var event;
     String url = Api.event_url;
     final prefs = await SharedPreferences.getInstance();
 
