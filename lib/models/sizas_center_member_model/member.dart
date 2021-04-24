@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Member {
   final String name, address, contactNo, imgUrl;
 

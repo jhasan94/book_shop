@@ -7,7 +7,6 @@ class BookScreenHome extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: Center(
-        //width: MediaQuery.of(context).size.width - 100.0,
         child: Body(),
       ),
     );

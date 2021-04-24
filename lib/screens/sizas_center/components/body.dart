@@ -24,8 +24,8 @@ class Body extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => GroupBody(
-                                //product: books[index],
-                                ),
+                              zoneId: index + 1,
+                            ),
                           )),
                     )),
           ),

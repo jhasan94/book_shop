@@ -1,8 +1,8 @@
 import 'package:book_shop/constants.dart';
-import 'package:book_shop/screens/audio/audio_provider/audio_player.dart';
-import 'package:book_shop/screens/home_screen.dart';
+import 'package:book_shop/screens/logiInRegister/welcomePage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,8 +19,14 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:
-          ChangeNotifierProvider(create: (_) => MyAudio(), child: HomeScreen()),
+      home: AnimatedSplashScreen(
+        splash: Image.asset("assets/images/coverphoto/appicon.jpg"),
+        nextScreen: WelcomePage(),
+        splashTransition: SplashTransition.scaleTransition,
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }
+// ChangeNotifierProvider(
+// create: (_) => MyAudio(), child:

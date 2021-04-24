@@ -1,9 +1,12 @@
 import 'package:book_shop/constants.dart';
-import 'package:book_shop/models/sizas_center_member_model/member.dart';
+import 'package:book_shop/models/sizas_center_member_model/member.dart' as m;
+import 'package:book_shop/models/sizas_center_model.dart';
 import 'package:book_shop/screens/sizas_center/components/group_details_member_list.dart';
 import 'package:flutter/material.dart';
 
 class GroupDetailsBody extends StatelessWidget {
+  List<Member> memberDetails;
+  GroupDetailsBody({Key key, this.memberDetails}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,10 +55,72 @@ class GroupDetailsBody extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               child: ListView.builder(
-                  itemCount: member.length,
-                  itemBuilder: (context, index) => GroupDetailsMemberList(
-                        member: member[index],
-                      )),
+                  itemCount: memberDetails.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      child: Container(
+                        height: 100,
+                        margin: EdgeInsets.all(kDefaultPaddin / 2),
+                        decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.only(left: 16),
+                                width: MediaQuery.of(context).size.width - 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      memberDetails[index].name,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      "address : " + memberDetails[index].email,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      "Contact no : " +
+                                          memberDetails[index].mobile,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(right: kDefaultPaddin),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Image.asset(
+                                    "assets/images/events/avatar.jpg",
+                                    height: 60,
+                                    width: 60,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ListTile(
+                      //   leading: Icon(Icons.location_city),
+                      //   title: Text(article.title),
+                      //   trailing: Icon(Icons.keyboard_arrow_right),
+                      // ),
+                    );
+                  }),
             ),
           ),
         ],

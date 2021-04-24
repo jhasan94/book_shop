@@ -1,8 +1,10 @@
-import 'package:book_shop/models/Book.dart';
+import 'package:book_shop/controllers/controller.dart';
 import 'package:book_shop/screens/Home/components/item_card.dart';
-import 'package:book_shop/screens/Home/details/details_screen.dart';
+import 'package:book_shop/screens/Home/details_page/details_screen.dart';
+import 'package:book_shop/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -10,8 +12,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  final Controller controller = Get.put(Controller());
   VideoPlayerController _controller;
-
   @override
   void initState() {
     super.initState();
@@ -21,61 +23,51 @@ class _BodyState extends State<Body> {
         _controller.play();
         _controller.setLooping(true);
         // Ensure the first frame is shown after the video is initialized
-        setState(() {});
       });
   }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Center(
       child: Column(
         children: [
           SizedBox(
-            height: 196.5,
+            height: SizeConfig.blockSizeVertical * 25,
             width: double.infinity,
             child: VideoPlayer(_controller),
-            // Carousel(
-            //   images: [
-            //     Image.asset(
-            //       "assets/images/coverphoto/islamic.jpg",
-            //       width: double.infinity,
-            //     ),
-            //     Image.asset(
-            //       "assets/images/coverphoto/islamicCover.jpg",
-            //       width: double.infinity,
-            //     ),
-            //     Image.asset(
-            //       "assets/images/coverphoto/islamic3.jpg",
-            //       width: double.infinity,
-            //     ),
-            //   ],
-            //   boxFit: BoxFit.fill,
-            //   dotSize: 4.0,
-            //   dotSpacing: 15.0,
-            //   dotColor: Colors.amber,
-            //   indicatorBgPadding: 3.0,
-            //   //dotBgColor: Colors.purple.withOpacity(0.5),
-            //   //borderRadius: true,
-            // )
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              child: ListView.builder(
-                  itemCount: books.length,
-                  itemBuilder: (context, index) => ItemCard(
-                        book: books[index],
+            child: Obx(() {
+              if (controller.isLoading.value)
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              else
+                return RefreshIndicator(
+                  onRefresh: () => controller.fetchHomepage(),
+                  child: ListView.builder(
+                    itemCount: controller.homePageList.first.data.length,
+                    itemBuilder: (context, index) {
+                      var homePage = controller.homePageList.first.data[index];
+                      return ItemCard(
+                        coverImg: homePage.image,
+                        title: homePage.title,
                         press: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Details(
-                                //product: books[index],
-                                book: books[index],
+                                title: homePage.title,
+                                img: homePage.image,
+                                des: homePage.details,
                               ),
                             )),
-                      )),
-            ),
-          ),
+                      );
+                    },
+                  ),
+                );
+            }),
+          )
         ],
       ),
     );

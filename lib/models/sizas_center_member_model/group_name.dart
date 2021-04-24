@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class GroupName {
   final String groupName;
   GroupName({

@@ -1,9 +1,12 @@
-import 'file:///D:/flutterProject/book_shop/lib/screens/article/article_screen.dart';
+import 'package:book_shop/models/article_model.dart';
+import 'package:book_shop/models/home_page_model.dart';
 import 'package:book_shop/screens/Home/book_screen_home.dart';
+import 'package:book_shop/screens/article/article_screen.dart';
 import 'package:book_shop/screens/audio/audio_list_screen.dart';
 import 'package:book_shop/screens/book/bookListBody.dart';
 import 'package:book_shop/screens/events/event_screen.dart';
 import 'package:book_shop/screens/sizas_center/sizas_center_home.dart';
+import 'package:book_shop/services/article_api_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
@@ -59,29 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      // leading: IconButton(
-      //   icon: SvgPicture.asset("assets/icons/back.svg"),
-      //   onPressed: () {},
-      // ),
-      // actions: <Widget>[
-      //   IconButton(
-      //     icon: SvgPicture.asset(
-      //       "assets/icons/search.svg",
-      //       // By default our  icon color is white
-      //       color: kTextColor,
-      //     ),
-      //     onPressed: () {},
-      //   ),
-      //   IconButton(
-      //     icon: SvgPicture.asset(
-      //       "assets/icons/cart.svg",
-      //       // By default our  icon color is white
-      //       color: kTextColor,
-      //     ),
-      //     onPressed: () {},
-      //   ),
-      //   SizedBox(width: kDefaultPaddin / 2)
-      // ],
     );
   }
 
