@@ -32,38 +32,42 @@ class BookListBody extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     else
-                      return GridView.builder(
-                          itemCount: controller.eBookList.first.data.length,
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio: 0.85,
-                          ),
-                          itemBuilder: (context, index) {
-                            var eBook = controller.eBookList.first.data[index];
-                            var a = eBook.size / 1000000;
-                            return ItemCard(
-                              id: eBook.id,
-                              img: eBook.coverPhoto,
-                              title: eBook.title,
-                              author_name: eBook.author,
-                              press: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsScreen1(
-                                      size: (eBook.size / 1000000),
-                                      price: eBook.price,
-                                      des: eBook.description,
-                                      title: eBook.title,
-                                      img: eBook.coverPhoto,
-                                      id: eBook.id,
-                                      authorname: eBook.author,
-                                      pdfurl: eBook.file,
-                                    ),
-                                  )),
-                            );
-                          });
+                      return RefreshIndicator(
+                        onRefresh: () => controller.fetchEBook(),
+                        child: GridView.builder(
+                            itemCount: controller.eBookList.first.data.length,
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1,
+                              childAspectRatio: 0.85,
+                            ),
+                            itemBuilder: (context, index) {
+                              var eBook =
+                                  controller.eBookList.first.data[index];
+                              var a = eBook.size / 1000000;
+                              return ItemCard(
+                                id: eBook.id,
+                                img: eBook.coverPhoto,
+                                title: eBook.title,
+                                author_name: eBook.author,
+                                press: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen1(
+                                        size: (eBook.size / 1000000),
+                                        price: eBook.price,
+                                        des: eBook.description,
+                                        title: eBook.title,
+                                        img: eBook.coverPhoto,
+                                        id: eBook.id,
+                                        authorname: eBook.author,
+                                        pdfurl: eBook.file,
+                                      ),
+                                    )),
+                              );
+                            }),
+                      );
                   })),
             ),
           ],

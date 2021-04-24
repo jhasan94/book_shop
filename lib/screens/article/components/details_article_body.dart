@@ -1,7 +1,6 @@
 import 'package:book_shop/api.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class DetailsArticleBody extends StatelessWidget {
   var articleTitle, imgUrl, des;
@@ -80,8 +79,8 @@ AppBar buildAppBar(BuildContext context) {
     backgroundColor: Colors.black12,
     elevation: 0,
     leading: IconButton(
-      icon: SvgPicture.asset(
-        'assets/icons/back.svg',
+      icon: Icon(
+        Icons.arrow_back,
         color: Colors.black,
       ),
       onPressed: () => Navigator.pop(context),

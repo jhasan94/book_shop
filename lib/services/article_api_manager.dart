@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 // ignore: camel_case_types
 class API_Manager {
   Future<SizasCenter> getSIzasCenterMember(String id) async {
-    var update = "1";
     var client = http.Client();
     var sizas_center_member;
     String url = Api.sizas_center_url + id;

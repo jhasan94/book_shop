@@ -44,24 +44,27 @@ class _BodyState extends State<Body> {
                   child: CircularProgressIndicator(),
                 );
               else
-                return ListView.builder(
-                  itemCount: controller.homePageList.first.data.length,
-                  itemBuilder: (context, index) {
-                    var homePage = controller.homePageList.first.data[index];
-                    return ItemCard(
-                      coverImg: homePage.image,
-                      title: homePage.title,
-                      press: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Details(
-                              title: homePage.title,
-                              img: homePage.image,
-                              des: homePage.details,
-                            ),
-                          )),
-                    );
-                  },
+                return RefreshIndicator(
+                  onRefresh: () => controller.fetchHomepage(),
+                  child: ListView.builder(
+                    itemCount: controller.homePageList.first.data.length,
+                    itemBuilder: (context, index) {
+                      var homePage = controller.homePageList.first.data[index];
+                      return ItemCard(
+                        coverImg: homePage.image,
+                        title: homePage.title,
+                        press: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Details(
+                                title: homePage.title,
+                                img: homePage.image,
+                                des: homePage.details,
+                              ),
+                            )),
+                      );
+                    },
+                  ),
                 );
             }),
           )

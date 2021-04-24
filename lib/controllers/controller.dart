@@ -8,11 +8,9 @@ import 'package:book_shop/models/e_book_model.dart';
 import 'package:book_shop/models/event_model.dart';
 import 'package:book_shop/models/home_page_model.dart';
 import 'package:book_shop/models/sizas_center_model.dart';
-import 'package:book_shop/services/shared_preference.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 
@@ -32,76 +30,52 @@ class Controller extends GetxController {
   var eBook;
   var audio;
   var event;
+  var members;
 
   //login reg btn ..............
   var btnNameLogin = "Login".obs;
   var btnNameSignUp = "Register now".obs;
 
-  //shared preference.......
-  SharedPref sharedPref = SharedPref();
-
-  Future loadSharedPrefs(String key) async {
+  loadDataFromDB(String key) async {
     switch (key) {
       case "article":
         {
-          try {
-            var article = Article.fromJson(await sharedPref.read(key));
-            print("data found");
-            articleList.assign(article);
-            sharedPref.setString("articleUpdateTime",
-                articleList.first.data[0].updatedAt.toString());
-            print(article.total.toString());
-          } catch (Exception) {
-            print("data not found");
-          }
+          var jsonMap = json.decode(await box.get(key));
+          article = Article.fromJson(jsonMap);
+          articleList.clear();
+          articleList.assign(article);
         }
         break;
       case "event":
         {
-          try {
-            var event = Event.fromJson(await sharedPref.read(key));
-            eventList.assign(event);
-            sharedPref.setString("eventUpdateTime",
-                eventList.first.data[0].updatedAt.toString());
-          } catch (Exception) {
-            print("data not found");
-          }
+          var jsonMap = json.decode(await box.get(key));
+          event = Event.fromJson(jsonMap);
+          eventList.clear();
+          eventList.assign(event);
         }
         break;
       case "eBook":
         {
-          try {
-            var eBook = EBook.fromJson(await sharedPref.read(key));
-            eBookList.assign(eBook);
-            sharedPref.setString("eBookUpdateTime",
-                eBookList.first.data[0].updatedAt.toString());
-          } catch (Exception) {
-            print("data not found");
-          }
-        }
-        break;
-      case "audio":
-        {
-          try {
-            var audio = Audio.fromJson(await sharedPref.read(key));
-            audioList.assign(audio);
-            sharedPref.setString("audioUpdateTime",
-                audioList.first.data[0].updatedAt.toString());
-          } catch (Exception) {
-            print("data not found");
-          }
+          var jsonMap = json.decode(await box.get(key));
+          eBook = EBook.fromJson(jsonMap);
+          eBookList.clear();
+          eBookList.assign(eBook);
         }
         break;
       case "homePage":
         {
-          try {
-            var homePage = Article.fromJson(await sharedPref.read(key));
-            homePageList.assign(homePage);
-            sharedPref.setString("homePageUpdateTime",
-                homePageList.first.data[0].updatedAt.toString());
-          } catch (Exception) {
-            print("data not found");
-          }
+          var jsonMap = json.decode(await box.get(key));
+          homePage = HomePage.fromJson(jsonMap);
+          homePageList.clear();
+          homePageList.assign(homePage);
+        }
+        break;
+      case "audio":
+        {
+          var jsonMap = json.decode(await box.get(key));
+          audio = Audio.fromJson(jsonMap);
+          audioList.clear();
+          audioList.assign(audio);
         }
         break;
       default:
@@ -113,54 +87,42 @@ class Controller extends GetxController {
   }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
+    await Hive.initFlutter();
+    box = await Hive.openBox("jsonDataBox");
     fetchHomepage();
     fetchEBook();
     fetchAudio();
-    fetchMemberList();
+    //fetchMemberList();
     fetchEvent();
+    fetchArticle();
     fetchArticle();
     super.onInit();
   }
 
   Future fetchArticle() async {
     isLoading(true);
-    int timeout = 5;
-
     var client = http.Client();
-
     String url = Api.article_url;
-    final prefs = await SharedPreferences.getInstance();
 
     try {
-      var response = await client.get(url).timeout(Duration(seconds: timeout));
+      var response = await client.get(url);
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-        //articleList.first.data[0].updatedAt != jsonMap["data"][0]["updated_at"]
+        //var a = isUpdate();
+        //var b;
+        //  || b == a needed this conditions for checking the update list
 
-        if (!prefs.containsKey("article") ||
-            sharedPref.getString("ArticleUpdateTime") ==
-                (jsonMap["data"][0]["updated_at"])) {
-          article = Article.fromJson(jsonMap);
-          print("api call....");
-          print(sharedPref.getString("articleUpdateTime"));
-          print(jsonMap["data"][0]["updated_at"]);
-          await sharedPref.remove("article");
-          await sharedPref.save("article", article);
+        if (!box.containsKey('article')) {
+          await box.put("article", jsonString);
         }
       }
-      await loadSharedPrefs("article");
-      //await sharedPref.remove("article");
-      //await prefs.remove("updateTime");
-    } on TimeoutException catch (Exception) {
-      await loadSharedPrefs("article");
-      print(Exception);
+      await loadDataFromDB('article');
     } on SocketException catch (e) {
-      await loadSharedPrefs("article");
+      loadDataFromDB('article');
       print(e);
     } on Error catch (e) {
-      await loadSharedPrefs("article");
+      loadDataFromDB('article');
       print(e);
     } finally {
       isLoading(false);
@@ -169,37 +131,23 @@ class Controller extends GetxController {
 
   Future fetchHomepage() async {
     isLoading(true);
-    int timeout = 5;
-
     var client = http.Client();
-
     String url = Api.home_url;
-    final prefs = await SharedPreferences.getInstance();
 
     try {
-      isLoading(true);
-      var response = await client.get(url).timeout(Duration(seconds: timeout));
+      var response = await client.get(url);
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-
-        if (!prefs.containsKey("homePage") ||
-            sharedPref.getString("homePageUpdateTime") ==
-                (jsonMap["data"][0]["updated_at"])) {
-          homePage = HomePage.fromJson(jsonMap);
-          await sharedPref.remove("homePage");
-          await sharedPref.save("homePage", homePage);
+        if (!box.containsKey('homePage')) {
+          await box.put('homePage', jsonString);
         }
       }
-      await loadSharedPrefs("homePage");
-    } on TimeoutException catch (Exception) {
-      await loadSharedPrefs("homePage");
-      print(Exception);
+      await loadDataFromDB('homePage');
     } on SocketException catch (e) {
-      await loadSharedPrefs("homePage");
+      loadDataFromDB('homePage');
       print(e);
     } on Error catch (e) {
-      await loadSharedPrefs("homePage");
+      loadDataFromDB('homePage');
       print(e);
     } finally {
       isLoading(false);
@@ -208,36 +156,23 @@ class Controller extends GetxController {
 
   Future fetchEBook() async {
     isLoading(true);
-    int timeout = 5;
-
     var client = http.Client();
-
     String url = Api.ebook_url;
-    final prefs = await SharedPreferences.getInstance();
 
     try {
-      var response = await client.get(url).timeout(Duration(seconds: timeout));
+      var response = await client.get(url);
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-
-        if (!prefs.containsKey("eBook") ||
-            sharedPref.getString("eBookUpdateTime") ==
-                (jsonMap["data"][0]["updated_at"])) {
-          eBook = EBook.fromJson(jsonMap);
-          await sharedPref.remove("eBook");
-          await sharedPref.save("eBook", eBook);
+        if (!box.containsKey('eBook')) {
+          await box.put("eBook", jsonString);
         }
       }
-      await loadSharedPrefs("eBook");
-    } on TimeoutException catch (Exception) {
-      await loadSharedPrefs("eBook");
-      print(Exception);
+      await loadDataFromDB('eBook');
     } on SocketException catch (e) {
-      await loadSharedPrefs("eBook");
+      loadDataFromDB('eBook');
       print(e);
     } on Error catch (e) {
-      await loadSharedPrefs("eBook");
+      loadDataFromDB('eBook');
       print(e);
     } finally {
       isLoading(false);
@@ -246,57 +181,24 @@ class Controller extends GetxController {
 
   Future fetchAudio() async {
     isLoading(true);
-    int timeout = 5;
-
     var client = http.Client();
-
     String url = Api.Audio_url;
-    final prefs = await SharedPreferences.getInstance();
 
     try {
-      var response = await client.get(url).timeout(Duration(seconds: timeout));
-      if (response.statusCode == 200) {
-        var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-
-        if (!prefs.containsKey("audio") ||
-            sharedPref.getString("audioUpdateTime") ==
-                (jsonMap["data"][0]["updated_at"])) {
-          audio = Audio.fromJson(jsonMap);
-          await sharedPref.remove("audio");
-          await sharedPref.save("audio", audio);
-        }
-      }
-      await loadSharedPrefs("audio");
-    } on TimeoutException catch (Exception) {
-      await loadSharedPrefs("audio");
-      print(Exception);
-    } on SocketException catch (e) {
-      await loadSharedPrefs("audio");
-      print(e);
-    } on Error catch (e) {
-      await loadSharedPrefs("audio");
-      print(e);
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  Future fetchMemberList() async {
-    var client = http.Client();
-    var members;
-    String url = Api.sizas_center_url;
-    try {
-      isLoading(true);
       var response = await client.get(url);
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-        members = SizasCenter.fromJson(jsonMap);
-        memberList.assign(members);
+        if (!box.containsKey('audio')) {
+          await box.put("audio", jsonString);
+        }
       }
-    } catch (Exception) {
-      print(Exception);
+      await loadDataFromDB('audio');
+    } on SocketException catch (e) {
+      loadDataFromDB('audio');
+      print(e);
+    } on Error catch (e) {
+      loadDataFromDB('audio');
+      print(e);
     } finally {
       isLoading(false);
     }
@@ -304,35 +206,23 @@ class Controller extends GetxController {
 
   Future fetchEvent() async {
     isLoading(true);
-    int timeout = 5;
-
     var client = http.Client();
     String url = Api.event_url;
-    final prefs = await SharedPreferences.getInstance();
 
     try {
-      var response = await client.get(url).timeout(Duration(seconds: timeout));
+      var response = await client.get(url);
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-
-        if (!prefs.containsKey("event") ||
-            sharedPref.getString("eventUpdateTime") ==
-                (jsonMap["data"][0]["updated_at"])) {
-          event = Event.fromJson(jsonMap);
-          await sharedPref.remove("event");
-          await sharedPref.save("event", event);
+        if (!box.containsKey('event')) {
+          await box.put("event", jsonString);
         }
       }
-      await loadSharedPrefs("event");
-    } on TimeoutException catch (Exception) {
-      await loadSharedPrefs("event");
-      print(Exception);
+      await loadDataFromDB('event');
     } on SocketException catch (e) {
-      await loadSharedPrefs("event");
+      loadDataFromDB('event');
       print(e);
     } on Error catch (e) {
-      await loadSharedPrefs("event");
+      loadDataFromDB('event');
       print(e);
     } finally {
       isLoading(false);

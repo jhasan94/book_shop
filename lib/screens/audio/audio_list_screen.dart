@@ -27,24 +27,27 @@ class AudioListScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   else
-                    return ListView.builder(
-                        itemCount: controller.audioList.first.data.length,
-                        itemBuilder: (context, index) {
-                          var audio = controller.audioList.first.data[index];
-                          return AudioListCart(
-                            sizeAudioFile: double.parse(audio.size) / 1000000,
-                            title: audio.title,
-                            press: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AudioPage(
-                                    img: audio.coverPhoto,
-                                    title: audio.title,
-                                    audioUrl: audio.audioOrginal,
-                                  ),
-                                )),
-                          );
-                        });
+                    return RefreshIndicator(
+                      onRefresh: () => controller.fetchAudio(),
+                      child: ListView.builder(
+                          itemCount: controller.audioList.first.data.length,
+                          itemBuilder: (context, index) {
+                            var audio = controller.audioList.first.data[index];
+                            return AudioListCart(
+                              sizeAudioFile: double.parse(audio.size) / 1000000,
+                              title: audio.title,
+                              press: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AudioPage(
+                                      img: audio.coverPhoto,
+                                      title: audio.title,
+                                      audioUrl: audio.audioOrginal,
+                                    ),
+                                  )),
+                            );
+                          }),
+                    );
                 })),
           ),
         ],

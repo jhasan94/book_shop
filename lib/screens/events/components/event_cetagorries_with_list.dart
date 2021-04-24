@@ -63,21 +63,25 @@ class EventCatagorriesList extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 else
-                  return ListView.builder(
-                      itemCount: controller.eventList.first.data.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        var event = controller.eventList.first.data[index];
-                        print("data is ...." + event.eventType.toString());
-                        return (event.eventType.toString() == "EventType.PAST")
-                            ? PopularEventTile(
-                                desc: event.name,
-                                date: event.createdAt.toString(),
-                                address: "address",
-                              )
-                            : Container();
-                      });
+                  return RefreshIndicator(
+                    onRefresh: () => controller.fetchEvent(),
+                    child: ListView.builder(
+                        itemCount: controller.eventList.first.data.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          var event = controller.eventList.first.data[index];
+                          print("data is ...." + event.eventType.toString());
+                          return (event.eventType.toString() ==
+                                  "EventType.PAST")
+                              ? PopularEventTile(
+                                  desc: event.name,
+                                  date: event.createdAt.toString(),
+                                  address: "address",
+                                )
+                              : Container();
+                        }),
+                  );
               })),
             ),
             Container(
@@ -87,22 +91,25 @@ class EventCatagorriesList extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 else
-                  return ListView.builder(
-                      itemCount: controller.eventList.first.data.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        var event = controller.eventList.first.data[index];
-                        print("data is ...." + event.eventType.toString());
-                        return (event.eventType.toString() ==
-                                "EventType.FUTURE")
-                            ? PopularEventTile(
-                                desc: event.name,
-                                date: event.createdAt.toString(),
-                                address: "address",
-                              )
-                            : Container();
-                      });
+                  return RefreshIndicator(
+                    onRefresh: () => controller.fetchEvent(),
+                    child: ListView.builder(
+                        itemCount: controller.eventList.first.data.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          var event = controller.eventList.first.data[index];
+                          print("data is ...." + event.eventType.toString());
+                          return (event.eventType.toString() ==
+                                  "EventType.FUTURE")
+                              ? PopularEventTile(
+                                  desc: event.name,
+                                  date: event.createdAt.toString(),
+                                  address: "address",
+                                )
+                              : Container();
+                        }),
+                  );
               })),
             ),
             //Icon(Icons.directions_transit),

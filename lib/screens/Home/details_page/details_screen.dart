@@ -1,9 +1,7 @@
 import 'package:book_shop/api.dart';
 import 'package:book_shop/screens/Home/details_page/components/description.dart';
-import 'package:book_shop/services/article_api_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../size_config.dart';
 
@@ -65,10 +63,7 @@ class Details extends StatelessWidget {
       backgroundColor: Colors.black12,
       elevation: 0,
       leading: IconButton(
-        icon: SvgPicture.asset(
-          'assets/icons/back.svg',
-          color: Colors.black,
-        ),
+        icon: Icon(Icons.arrow_back),
         onPressed: () => Navigator.pop(context),
       ),
     );
